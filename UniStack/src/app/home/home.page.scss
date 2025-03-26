@@ -1,27 +1,98 @@
-#container {
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, #E6F3FF, #F0E6FF);
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+h1 {
+  font-size: 5rem;
+  color: #333;
+  margin-bottom: 1rem;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.app-logo {
+  width: 220px;
+  height: 220px;
+  margin-bottom: 2rem;
+  border-radius: 30%;
 }
 
-#container a {
-  text-decoration: none;
+.button-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #333;
+}
+
+.spaced-row {
+  margin-bottom: 80px; /* Increased spacing between rows */
+}
+
+.spaced-buttons {
+  gap: 8rem; /* Increased spacing between buttons */
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3rem; /* Reduce font size for smaller screens */
+  }
+
+  .app-logo {
+    width: 150px; /* Reduce logo size */
+    height: 150px;
+  }
+
+  .action-button {
+    padding: 0.75rem 2rem; /* Reduce button padding */
+    font-size: 1.5rem; /* Reduce button font size */
+  }
+
+  .spaced-row {
+    margin-bottom: 40px; /* Reduce spacing between rows */
+  }
+
+  .spaced-buttons {
+    gap: 4rem; /* Reduce spacing between buttons */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.5rem; /* Further reduce font size for very small screens */
+  }
+
+  .app-logo {
+    width: 120px; /* Further reduce logo size */
+    height: 120px;
+  }
+
+  .action-button {
+    padding: 0.5rem 1.5rem; /* Further reduce button padding */
+    font-size: 1.2rem; /* Further reduce button font size */
+  }
+
+  .spaced-row {
+    margin-bottom: 30px; /* Further reduce spacing between rows */
+  }
+
+  .spaced-buttons {
+    gap: 2rem; /* Further reduce spacing between buttons */
+  }
 }
