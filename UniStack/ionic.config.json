@@ -1,0 +1,7 @@
+{
+  "name": "UniStack",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
