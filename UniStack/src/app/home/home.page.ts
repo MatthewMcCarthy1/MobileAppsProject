@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { Component, inject } from '@angular/core';
+import { IonContent } from '@ionic/angular/standalone';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonContent],
 })
 export class HomePage {
-  constructor() {}
+  private auth = inject(Auth); // Use Angular's inject function
 }
