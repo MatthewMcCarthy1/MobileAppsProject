@@ -3,11 +3,11 @@ import { IonContent } from '@ionic/angular/standalone';
 import { Auth } from '@angular/fire/auth';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-main',
+  templateUrl: 'main.page.html',
+  styleUrls: ['main.page.scss'],
   imports: [IonContent],
 })
-export class HomePage {
+export class MainPage {
   private auth = inject(Auth); // Use Angular's inject function
 }
