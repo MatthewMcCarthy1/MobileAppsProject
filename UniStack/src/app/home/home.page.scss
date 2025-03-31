@@ -3,3 +3,21 @@
   width: 100%;
   background-color: #f0f0f0;
 }
+
+ion-tabs {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+}
+
+ion-tab-bar {
+  --background: #f4f4f4;
+  --color: #000000;
+}
+
+ion-tab-button {
+  --color: #000000;
+  --color-selected: #000000;
+}
+
