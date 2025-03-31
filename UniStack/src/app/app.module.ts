@@ -5,17 +5,18 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+import { App } from '@capacitor/app';
 
 @NgModule({
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppComponent // Import AppComponent as a standalone component
+    AppComponent
   ],
   providers: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()),
+    AppComponent
   ],
-  bootstrap: [AppComponent]
 })
 export class AppModule {}
