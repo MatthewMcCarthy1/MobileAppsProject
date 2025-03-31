@@ -32,7 +32,7 @@ h1 {
   border: none;
   padding: 1rem 3rem;
   font-size: 2rem;
-  border-radius: 10px;
+  border-radius: 40px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -42,57 +42,57 @@ h1 {
 }
 
 .spaced-row {
-  margin-bottom: 80px; /* Increased spacing between rows */
+  margin-bottom: 80px; 
 }
 
 .spaced-buttons {
-  gap: 8rem; /* Increased spacing between buttons */
+  gap: 8rem; 
 }
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 3rem; /* Reduce font size for smaller screens */
+    font-size: 3rem; 
   }
 
   .app-logo {
-    width: 150px; /* Reduce logo size */
+    width: 150px; 
     height: 150px;
   }
 
   .action-button {
-    padding: 0.75rem 2rem; /* Reduce button padding */
-    font-size: 1.5rem; /* Reduce button font size */
+    padding: 0.75rem 2rem; 
+    font-size: 1.5rem; 
   }
 
   .spaced-row {
-    margin-bottom: 40px; /* Reduce spacing between rows */
+    margin-bottom: 40px; 
   }
 
   .spaced-buttons {
-    gap: 4rem; /* Reduce spacing between buttons */
+    gap: 4rem; 
   }
 }
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 2.5rem; /* Further reduce font size for very small screens */
+    font-size: 2.5rem; 
   }
 
   .app-logo {
-    width: 120px; /* Further reduce logo size */
+    width: 120px; 
     height: 120px;
   }
 
   .action-button {
-    padding: 0.5rem 1.5rem; /* Further reduce button padding */
-    font-size: 1.2rem; /* Further reduce button font size */
+    padding: 0.5rem 1.5rem; 
+    font-size: 1.2rem; 
   }
 
   .spaced-row {
-    margin-bottom: 30px; /* Further reduce spacing between rows */
+    margin-bottom: 30px; 
   }
 
   .spaced-buttons {
-    gap: 2rem; /* Further reduce spacing between buttons */
+    gap: 2rem; 
   }
 }
