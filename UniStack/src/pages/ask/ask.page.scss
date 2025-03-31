@@ -1,0 +1,29 @@
+ion-content {
+  --background: #fff;
+}
+
+.ask-container {
+  padding: 16px;
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: #ffffff;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  --border-radius: 8px;
+  --border-width: 1px;
+  --border-color: #000;
+  color: #000;
+}
+
+.submit-button {
+  margin-top: 20px;
+}
+
+ion-textarea {
+  min-height: 120px;
+}

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ask a Question</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ask-container">
+    <ion-list>
+      <ion-item>
+        <ion-input 
+          label="Title" 
+          labelPlacement="floating" 
+          placeholder="What's your question? Be specific."
+          [(ngModel)]="question.title">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea 
+          label="Body" 
+          labelPlacement="floating" 
+          placeholder="Include all the information someone would need to answer your question"
+          [(ngModel)]="question.body"
+          [autoGrow]="true"
+          rows="6">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-input 
+          label="Tags" 
+          labelPlacement="floating" 
+          placeholder="Add up to 5 tags (separated by commas)"
+          [(ngModel)]="question.tags">
+        </ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" (click)="submitQuestion()" class="submit-button">
+      Post Your Question
+    </ion-button>
+  </div>
+</ion-content>
