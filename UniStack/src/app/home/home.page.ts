@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
-import { IonContent } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { addIcons } from 'ionicons';
+import { home, addCircleOutline, personCircleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonContent]
+  imports: [IonicModule]
 })
 export class HomePage {
-  constructor() {}
+  constructor() {
+    addIcons({
+      home,
+      addCircleOutline,
+      personCircleOutline
+    });
+  }
 }
