@@ -1,9 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
+  <ion-searchbar 
+    [(ngModel)]="searchText" 
+    (ionInput)="onSearchChange($event)"
+    placeholder="Search"
+    animated="true"
+    show-clear-button="always">
+  </ion-searchbar>
+  
   <div class="home-container">
+    <p *ngIf="searchText">Current search: {{searchText}}</p>
     
+    <div class="loading-container" *ngIf="isLoading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Loading questions...</p>
+    </div>
+    
+    <div *ngIf="!isLoading && questions.length === 0" class="no-questions">
+      <p>No questions have been posted yet. Be the first to ask a question!</p>
+      <ion-button routerLink="/tabs/ask" expand="block" fill="outline">Ask a Question</ion-button>
+    </div>
+    
+    <div class="questions-container" *ngIf="!isLoading && questions.length > 0">
+      <div class="question-card" *ngFor="let question of questions">
+        <div class="question-header">
+          <h2 class="question-title">{{ question.title }}</h2>
+        </div>
+        
+        <div class="question-content">
+          <p class="question-body">{{ question.body }}</p>
+        </div>
+        
+        <div class="question-footer">
+          <div class="user-info">
+            <ion-icon name="person-circle-outline"></ion-icon>
+            <span>{{ question.userEmail || 'Anonymous' }}</span>
+          </div>
+          
+          <div class="timestamp" *ngIf="formatDate(question.createdAt)">
+            <ion-icon name="time-outline"></ion-icon>
+            <span>{{ formatDate(question.createdAt) | date:'MMM d, y' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>
-
-<ion-header>
-  <ion-searchbar placeholder="Search"></ion-searchbar>
-</ion-header>
