@@ -27,3 +27,14 @@ ion-item {
 ion-textarea {
   min-height: 120px;
 }
+
+ion-tabs {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+ion-tab-bar {
+  --background: #fff;
+  --color: #000000;
+}
