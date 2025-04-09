@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +10,5 @@ import { addIcons } from 'ionicons';
   imports: [IonicModule, CommonModule] 
 })
 export class ProfilePage {
-  constructor() {
-  }
+  constructor() {}
 }
