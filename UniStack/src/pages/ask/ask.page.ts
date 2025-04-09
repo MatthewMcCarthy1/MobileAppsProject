@@ -16,8 +16,7 @@ import { home, addCircleOutline, personCircleOutline } from 'ionicons/icons';
 export class AskPage {
   question = {
     title: '',
-    body: '',
-    tags: ''
+    body: ''
   };
 
   constructor() {
@@ -34,8 +33,7 @@ export class AskPage {
     // Clear form after submission
     this.question = {
       title: '',
-      body: '',
-      tags: ''
+      body: ''
     };
   }
 }
