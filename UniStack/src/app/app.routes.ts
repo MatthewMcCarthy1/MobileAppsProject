@@ -22,6 +22,10 @@ export const routes: Routes = [
     loadComponent: () => import('../pages/ask/ask.page').then(m => m.AskPage)
   },
   {
+    path: 'profile',
+    loadComponent: () => import('../pages/profile/profile.page').then(m => m.ProfilePage)
+  },
+  {
     path: '',
     redirectTo: 'main',
     pathMatch: 'full',
