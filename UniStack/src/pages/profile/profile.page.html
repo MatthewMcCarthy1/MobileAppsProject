@@ -6,7 +6,16 @@
 
 <ion-content [fullscreen]="true">
   <div class="profile-container">
-    <!-- Profile content will go here -->
+    <div class="profile-picture-container">
+      <div class="profile-picture" (click)="changeProfilePicture()" tappable>
+        <img *ngIf="profileImage" [src]="profileImage" alt="Profile Picture">
+        <ion-icon *ngIf="!profileImage" name="person-circle-outline"></ion-icon>
+        <div class="picture-overlay">
+          <ion-icon name="camera"></ion-icon>
+        </div>
+      </div>
+      <p class="tap-instruction">Tap to change profile picture</p>
+    </div>
     
     <div class="button-container">
       <button class="logout-button" 

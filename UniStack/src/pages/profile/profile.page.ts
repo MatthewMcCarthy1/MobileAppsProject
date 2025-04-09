@@ -3,6 +3,9 @@ import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Auth, signOut } from '@angular/fire/auth';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { addIcons } from 'ionicons';
+import { personCircleOutline, camera } from 'ionicons/icons';
 
 @Component({
   selector: 'app-profile',
@@ -15,8 +18,11 @@ export class ProfilePage {
   private auth: Auth = inject(Auth);
   private router: Router = inject(Router);
   isLoading: boolean = false;
+  profileImage: string | null = null;
 
-  constructor() {}
+  constructor() {
+    addIcons({ personCircleOutline, camera });
+  }
   
   async onLogout() {
     this.isLoading = true;
@@ -27,6 +33,21 @@ export class ProfilePage {
       console.error('Logout error:', error);
     } finally {
       this.isLoading = false;
+    }
+  }
+
+  async changeProfilePicture() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Prompt
+      });
+      
+      this.profileImage = image.dataUrl ?? null;
+    } catch (error) {
+      console.error('Camera error:', error);
     }
   }
 }
