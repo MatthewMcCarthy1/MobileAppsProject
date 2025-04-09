@@ -14,20 +14,46 @@ export const routes: Routes = [
     loadComponent: () => import('../pages/register/register.page').then((m) => m.RegisterPage),
   },
   {
-    path: 'home',
-    loadComponent: () => import('../pages/home/home.page').then(m => m.HomePage)
-  },
-  {
-    path: 'ask',
-    loadComponent: () => import('../pages/ask/ask.page').then(m => m.AskPage)
-  },
-  {
-    path: 'profile',
-    loadComponent: () => import('../pages/profile/profile.page').then(m => m.ProfilePage)
+    path: 'tabs',
+    loadComponent: () => import('../pages/tabs/tabs.page').then((m) => m.TabsPage),
+    children: [
+      {
+        path: 'home',
+        loadComponent: () => import('../pages/home/home.page').then(m => m.HomePage)
+      },
+      {
+        path: 'ask',
+        loadComponent: () => import('../pages/ask/ask.page').then(m => m.AskPage)
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('../pages/profile/profile.page').then(m => m.ProfilePage)
+      },
+      {
+        path: '',
+        redirectTo: '/tabs/home',
+        pathMatch: 'full'
+      }
+    ]
   },
   {
     path: '',
     redirectTo: 'main',
     pathMatch: 'full',
   },
+  {
+    path: 'home',
+    redirectTo: 'tabs/home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'ask',
+    redirectTo: 'tabs/ask',
+    pathMatch: 'full'
+  },
+  {
+    path: 'profile',
+    redirectTo: 'tabs/profile',
+    pathMatch: 'full'
+  }
 ];

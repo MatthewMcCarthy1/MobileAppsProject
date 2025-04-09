@@ -48,7 +48,7 @@ export class RegisterPage {
         this.password
       );
       console.log('Registered user:', userCredential.user);
-      this.router.navigate(['/home']);  // Changed from '/login' to '/home'
+      this.router.navigate(['/tabs/home']);  
     } catch (error: any) {
       switch (error.code) {
         case 'auth/email-already-in-use':

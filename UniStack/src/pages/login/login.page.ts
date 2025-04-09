@@ -48,7 +48,7 @@ export class LoginPage {
         this.password
       );
       console.log('Logged in user:', userCredential.user);
-      this.router.navigate(['/home']);  // Changed from '/main' to '/home'
+      this.router.navigate(['/tabs/home']); 
     } catch (error: any) {
       switch (error.code) {
         case 'auth/invalid-email':
