@@ -30,13 +30,13 @@
       </ion-item>
     </ion-list>
 
-    <ion-button 
-      expand="block" 
-      (click)="submitQuestion()" 
-      class="submit-button"
-      [disabled]="isSubmitting">
-      <ion-spinner *ngIf="isSubmitting" name="dots" slot="start"></ion-spinner>
-      {{ isSubmitting ? 'Posting...' : 'Post Your Question' }}
-    </ion-button>
+    <div class="button-container">
+      <button class="post-button" 
+              (click)="submitQuestion()" 
+              [disabled]="isSubmitting">
+        <span *ngIf="isSubmitting" class="spinner"></span>
+        {{ isSubmitting ? 'Posting...' : 'Post Your Question' }}
+      </button>
+    </div>
   </div>
 </ion-content>
