@@ -1,24 +1,21 @@
 .home-container {
   height: 100%;
   width: 100%;
-  background-color: #f0f0f0;
+}
+
+ion-content {
+  --background: #fff;
 }
 
 ion-tabs {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #fff;
 }
 
 ion-tab-bar {
   --background: #fff;
   --color: #000000;
-}
-
-ion-tab-button {
-  --color: #000000;
-  --color-selected: #000000;
 }
 
 ion-searchbar {
