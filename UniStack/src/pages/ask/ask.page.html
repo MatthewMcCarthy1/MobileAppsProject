@@ -12,7 +12,8 @@
           label="Title" 
           labelPlacement="floating" 
           placeholder="What's your question? Be specific."
-          [(ngModel)]="question.title">
+          [(ngModel)]="question.title"
+          [disabled]="isSubmitting">
         </ion-input>
       </ion-item>
 
@@ -23,13 +24,19 @@
           placeholder="Include all the information someone would need to answer your question"
           [(ngModel)]="question.body"
           [autoGrow]="true"
-          rows="6">
+          rows="6"
+          [disabled]="isSubmitting">
         </ion-textarea>
       </ion-item>
     </ion-list>
 
-    <ion-button expand="block" (click)="submitQuestion()" class="submit-button">
-      Post Your Question
+    <ion-button 
+      expand="block" 
+      (click)="submitQuestion()" 
+      class="submit-button"
+      [disabled]="isSubmitting">
+      <ion-spinner *ngIf="isSubmitting" name="dots" slot="start"></ion-spinner>
+      {{ isSubmitting ? 'Posting...' : 'Post Your Question' }}
     </ion-button>
   </div>
 </ion-content>
