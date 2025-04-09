@@ -26,10 +26,7 @@ export class QuestionService {
         createdAt: serverTimestamp()
       };
       
-      console.log('Attempting to add question:', questionData);
-      
       const docRef = await addDoc(collection(this.firestore, 'questions'), questionData);
-      console.log('Question added with ID:', docRef.id);
       return docRef.id;
     } catch (error) {
       console.error('Error adding question:', error);
