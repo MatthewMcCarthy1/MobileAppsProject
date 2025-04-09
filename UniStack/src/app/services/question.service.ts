@@ -1,7 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, collection, addDoc, serverTimestamp } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, serverTimestamp, collectionData, query, orderBy } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Question } from '../models/question.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,11 @@ export class QuestionService {
       console.error('Error adding question:', error);
       throw error;
     }
+  }
+
+  getQuestions(): Observable<Question[]> {
+    const questionsRef = collection(this.firestore, 'questions');
+    const questionsQuery = query(questionsRef, orderBy('createdAt', 'desc'));
+    return collectionData(questionsQuery, { idField: 'id' }) as Observable<Question[]>;
   }
 }
