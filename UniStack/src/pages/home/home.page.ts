@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { QuestionService } from '../../app/services/question.service';
@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { personCircleOutline, timeOutline, add } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
+import { QuestionDetailModal } from '../../app/modals/question-detail/question-detail.modal';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
   isLoading = true;
   
   constructor(
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private modalController: ModalController
   ) {
     addIcons({
       personCircleOutline,
@@ -72,5 +74,17 @@ export class HomePage implements OnInit {
   formatDate(timestamp: any): Date | null {
     if (!timestamp) return null;
     return timestamp.toDate ? timestamp.toDate() : timestamp;
+  }
+
+  async openQuestionDetail(question: Question) {
+    const modal = await this.modalController.create({
+      component: QuestionDetailModal,
+      componentProps: {
+        question: question
+      },
+      cssClass: 'question-detail-modal'
+    });
+
+    await modal.present();
   }
 }

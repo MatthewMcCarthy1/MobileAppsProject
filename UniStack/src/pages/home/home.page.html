@@ -47,7 +47,7 @@
             <span>{{ formatDate(question.createdAt) | date:'MMM d, y' }}</span>
           </div>
           
-          <button class="view-button">
+          <button class="view-button" (click)="openQuestionDetail(question)">
             View
           </button>
         </div>
