@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Question Details</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="question-container">
+    <div class="question-header">
+      <h1 class="question-title">{{ question.title }}</h1>
+    </div>
+    
+    <div class="question-body">
+      <p>{{ question.body }}</p>
+    </div>
+    
+    <div class="question-footer">
+      <div class="user-info">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <span>{{ question.userEmail || 'Anonymous' }}</span>
+      </div>
+      
+      <div class="timestamp" *ngIf="formatDate(question.createdAt)">
+        <ion-icon name="time-outline"></ion-icon>
+        <span>{{ formatDate(question.createdAt) | date:'MMM d, y' }}</span>
+      </div>
+    </div>
+  </div>
+</ion-content>
