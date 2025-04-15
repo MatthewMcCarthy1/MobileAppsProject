@@ -132,6 +132,22 @@ ion-content {
   }
 }
 
+/* No answers message */
+.no-answers-message {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  
+  p {
+    margin: 0;
+    font-size: 15px;
+    color: #64748b;
+    line-height: 1.5;
+  }
+}
+
 .submit-answer-section {
   margin: 16px;
   background: white;
