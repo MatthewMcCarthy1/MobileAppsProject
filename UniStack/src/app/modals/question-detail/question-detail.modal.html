@@ -31,4 +31,74 @@
       </div>
     </div>
   </div>
+  
+  <!-- Answers Section -->
+  <div class="answers-section" *ngIf="question.answers && question.answers.length > 0">
+    <h2 class="answers-title">Answers ({{ question.answers.length }})</h2>
+    
+    <div class="answer-item" *ngFor="let answer of question.answers">
+      <div class="answer-content">
+        <p>{{ answer.text }}</p>
+      </div>
+      
+      <div class="answer-footer">
+        <div class="user-info">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <span>{{ answer.userEmail || 'Anonymous' }}</span>
+        </div>
+        
+        <div class="timestamp" *ngIf="formatDate(answer.createdAt)">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ formatDate(answer.createdAt) | date:'MMM d, y' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Extra padding at the bottom to prevent content from being hidden behind the answer bar -->
+  <div class="content-bottom-padding"></div>
 </ion-content>
+
+<!-- Sticky Answer Bar -->
+<div class="sticky-answer-bar" [class.expanded]="isAnswerFormExpanded">
+  <div class="collapsed-bar" *ngIf="!isAnswerFormExpanded">
+    <button class="answer-button" (click)="toggleAnswerForm()">
+      <ion-icon name="chatbox-outline"></ion-icon>
+      Add Your Answer
+    </button>
+  </div>
+  
+  <div class="expanded-form" *ngIf="isAnswerFormExpanded">
+    <div class="form-header">
+      <h3>Your Answer</h3>
+      <button class="close-form-button" (click)="toggleAnswerForm()">
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </button>
+    </div>
+    
+    <ion-textarea 
+      [(ngModel)]="answerText" 
+      placeholder="Write your answer here..." 
+      [autoGrow]="true"
+      rows="3"
+      class="answer-input"
+      [disabled]="isSubmitting">
+    </ion-textarea>
+    
+    <div class="form-actions">
+      <button 
+        class="cancel-button" 
+        (click)="toggleAnswerForm()"
+        [disabled]="isSubmitting">
+        Cancel
+      </button>
+      <button 
+        class="submit-button" 
+        (click)="submitAnswer()" 
+        [disabled]="isSubmitting || !answerText.trim()">
+        <ion-icon name="send-outline"></ion-icon>
+        {{ isSubmitting ? 'Posting...' : 'Post Answer' }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -39,4 +39,34 @@ export class QuestionService {
     const questionsQuery = query(questionsRef, orderBy('createdAt', 'desc'));
     return collectionData(questionsQuery, { idField: 'id' }) as Observable<Question[]>;
   }
+  
+  async addAnswer(questionId: string, answerText: string): Promise<string> {
+    try {
+      const user = this.auth.currentUser;
+      if (!user) {
+        throw new Error('User must be logged in to post an answer');
+      }
+      
+      const answerData = {
+        text: answerText,
+        userId: user.uid,
+        userEmail: user.email,
+        createdAt: serverTimestamp()
+      };
+      
+      // Create answer in subcollection of the question
+      const answersRef = collection(this.firestore, `questions/${questionId}/answers`);
+      const docRef = await addDoc(answersRef, answerData);
+      return docRef.id;
+    } catch (error) {
+      console.error('Error adding answer:', error);
+      throw error;
+    }
+  }
+
+  getAnswers(questionId: string): Observable<any[]> {
+    const answersRef = collection(this.firestore, `questions/${questionId}/answers`);
+    const answersQuery = query(answersRef, orderBy('createdAt', 'asc'));
+    return collectionData(answersQuery, { idField: 'id' });
+  }
 }
