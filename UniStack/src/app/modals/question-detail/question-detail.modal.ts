@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { QuestionService } from '../../services/question.service';
 import { Auth } from '@angular/fire/auth';
 import { addIcons } from 'ionicons';
-import { personCircleOutline, timeOutline, closeOutline, chatboxOutline, chevronDownOutline, sendOutline } from 'ionicons/icons';
+import { personCircleOutline, timeOutline, closeOutline, chatboxOutline, chevronDownOutline, sendOutline, trashOutline, ellipsisHorizontal } from 'ionicons/icons';
 
 @Component({
   selector: 'app-question-detail',
@@ -35,7 +35,9 @@ export class QuestionDetailModal implements OnInit {
       closeOutline, 
       chatboxOutline, 
       chevronDownOutline, 
-      sendOutline 
+      sendOutline,
+      trashOutline,
+      ellipsisHorizontal
     });
   }
 
@@ -109,6 +111,41 @@ export class QuestionDetailModal implements OnInit {
       );
     } finally {
       this.isSubmitting = false;
+    }
+  }
+
+  isCurrentUserAuthor(userId: string): boolean {
+    return !!this.auth.currentUser && this.auth.currentUser.uid === userId;
+  }
+
+  async confirmDeleteAnswer(answer: any) {
+    const alert = await this.alertController.create({
+      header: 'Delete Answer',
+      message: 'Are you sure you want to delete this answer?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          role: 'destructive',
+          handler: () => this.deleteAnswer(answer)
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async deleteAnswer(answer: any) {
+    try {
+      await this.questionService.deleteAnswer(this.question.id, answer.id);
+      // Update the local array to reflect the deletion immediately
+      this.question.answers = this.question.answers.filter((a: any) => a.id !== answer.id);
+      this.presentToast('Answer deleted successfully', 'success');
+    } catch (error: any) {
+      this.presentAlert('Error', error.message || 'Failed to delete answer');
     }
   }
   

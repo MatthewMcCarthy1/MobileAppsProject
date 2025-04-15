@@ -51,6 +51,15 @@
           <ion-icon name="time-outline"></ion-icon>
           <span>{{ formatDate(answer.createdAt) | date:'MMM d, y' }}</span>
         </div>
+        
+        <ion-button *ngIf="isCurrentUserAuthor(answer.userId)" 
+                  fill="clear"
+                  color="danger"
+                  size="small"
+                  class="delete-button" 
+                  (click)="confirmDeleteAnswer(answer)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
       </div>
     </div>
   </div>

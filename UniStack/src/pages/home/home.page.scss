@@ -124,6 +124,36 @@ ion-searchbar {
   }
 }
 
+.question-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #ef4444;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  
+  &:active {
+    background-color: rgba(239, 68, 68, 0.1);
+  }
+  
+  ion-icon {
+    font-size: 18px;
+  }
+}
+
 .user-info, .timestamp {
   display: flex;
   align-items: center;

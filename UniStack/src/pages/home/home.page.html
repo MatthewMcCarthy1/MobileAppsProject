@@ -27,7 +27,7 @@
     </div>
     
     <div class="questions-container" *ngIf="!isLoading && questions.length > 0">
-      <div class="question-card" *ngFor="let question of questions">
+      <div class="question-card" *ngFor="let question of questions" (click)="openQuestionDetail(question)">
         <div class="question-header">
           <h2 class="question-title">{{ question.title }}</h2>
         </div>
@@ -47,9 +47,21 @@
             <span>{{ formatDate(question.createdAt) | date:'MMM d, y' }}</span>
           </div>
           
-          <button class="view-button" (click)="openQuestionDetail(question)">
-            View
-          </button>
+          <div class="question-actions">
+            <button class="view-button">
+              View
+            </button>
+            
+            <button *ngIf="isCurrentUserAuthor(question.userId)" 
+                    class="delete-button"
+                    fill="clear"
+                  color="danger"
+                  size="small"
+                  class="delete-button" 
+                    (click)="confirmDeleteQuestion(question, $event)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>
