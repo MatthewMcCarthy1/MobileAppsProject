@@ -55,9 +55,8 @@
             <button *ngIf="isCurrentUserAuthor(question.userId)" 
                     class="delete-button"
                     fill="clear"
-                  color="danger"
-                  size="small"
-                  class="delete-button" 
+                    color="danger"
+                    size="small"
                     (click)="confirmDeleteQuestion(question, $event)">
               <ion-icon name="trash-outline"></ion-icon>
             </button>
