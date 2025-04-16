@@ -10,12 +10,14 @@ import { Router } from '@angular/router';
   imports: [IonContent],
 })
 export class MainPage {
-  private router = inject(Router);
+  private router = inject(Router); // Inject Router for navigation
 
+  // Navigate to login page
   navigateToLogin() {
     this.router.navigate(['/login']);
   }
 
+  // Navigate to register page
   navigateToRegister() {
     this.router.navigate(['/register']);
   }

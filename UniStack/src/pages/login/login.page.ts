@@ -7,6 +7,11 @@ import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 
+/**
+ * LoginPage Component
+ * 
+ * Handles user authentication using Firebase Authentication
+ */
 @Component({
   selector: 'app-login',
   templateUrl: 'login.page.html',
@@ -25,31 +30,48 @@ export class LoginPage {
   errorMessage: string = '';
 
   constructor() {
+    // Add icons to be used in the component
     addIcons({ happyOutline, eyeOutline, eyeOffOutline });
   }
 
+  /**
+   * Toggles the visibility of the password field
+   */
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
+  /**
+   * Handles the login process
+   * 
+   * Validates input fields, attempts to log in the user using Firebase Authentication,
+   * and navigates to the home page upon successful login. Displays error messages
+   * for invalid credentials or other login issues.
+   */
   async onLogin() {
+    // Check if email and password fields are filled
     if (!this.email || !this.password) {
       this.errorMessage = 'Please fill in all fields';
       return;
     }
 
+    // Set loading state to true
     this.isLoading = true;
+    // Clear any previous error messages
     this.errorMessage = '';
 
     try {
+      // Attempt to sign in with email and password
       const userCredential = await signInWithEmailAndPassword(
         this.auth,  // The auth instance is used here to authenticate
         this.email,
         this.password
       );
       console.log('Logged in user:', userCredential.user);
+      // Navigate to the home page upon successful login
       this.router.navigate(['/tabs/home']); 
     } catch (error: any) {
+      // Handle different error codes and set appropriate error messages
       switch (error.code) {
         case 'auth/invalid-email':
           this.errorMessage = 'Invalid email address';
@@ -65,6 +87,7 @@ export class LoginPage {
           console.error('Login error:', error);
       }
     } finally {
+      // Reset loading state
       this.isLoading = false;
     }
   }

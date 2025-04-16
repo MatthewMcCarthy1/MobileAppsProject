@@ -7,6 +7,11 @@ import { addIcons } from 'ionicons';
 import { eyeOutline, eyeOffOutline, happyOutline } from 'ionicons/icons';
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 
+/**
+ * RegisterPage Component
+ * 
+ * Handles new user registration functionality using Firebase Authentication
+ */
 @Component({
   selector: 'app-register',
   templateUrl: 'register.page.html',
@@ -15,23 +20,40 @@ import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
   imports: [CommonModule, FormsModule, IonContent, IonIcon]
 })
 export class RegisterPage {
+  // Inject Firebase Authentication service
   private auth: Auth = inject(Auth);
+  // Inject Router for navigation after registration
   private router: Router = inject(Router);
 
+  // Form input for user email
   email: string = '';
+  // Form input for user password
   password: string = '';
+  // Toggle for password visibility
   showPassword: boolean = false;
+  // Flag to track registration in progress
   isLoading: boolean = false;
+  // Store error messages for display to the user
   errorMessage: string = '';
 
   constructor() {
+    // Add icons to be used in the component
     addIcons({ happyOutline, eyeOutline, eyeOffOutline });
   }
 
+  /**
+   * Toggles the visibility of the password field
+   */
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
+  /**
+   * Handles user registration
+   * 
+   * Validates input fields, attempts to register the user with Firebase Authentication,
+   * and navigates to the home page upon successful registration.
+   */
   async onRegister() {
     if (!this.email || !this.password) {
       this.errorMessage = 'Please fill in all fields';
