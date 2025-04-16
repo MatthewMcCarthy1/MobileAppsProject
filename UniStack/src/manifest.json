@@ -1,20 +1,53 @@
 {
-  "name": "UniStack",
-  "short_name": "UniStack",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#3880ff",
-  "icons": [
-    {
-      "src": "assets/icon/icon-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "assets/icon/icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+    "name": "UniStack",
+    "short_name": "UniStack",
+    "start_url": "/",
+    "display": "standalone",
+    "description": "A simple forum for asking and answering questions related to your course.",
+    "lang": "en-US",
+    "dir": "auto",
+    "theme_color": "#4285F4",
+    "background_color": "#FFFFFF",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "assets/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "assets/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "assets/screenshots/home-screen.png",
+            "sizes": "2880x1800",
+            "type": "image/png",
+            "description": "UniStack home dashboard"
+        }
+    ],
+    "related_applications": [
+        {
+            "platform":"windows",
+            "url": "https://apps.microsoft.com/store/detail/[your-app-id]"
+        }
+    ],
+    "prefer_related_applications": false,
+    "shortcuts": [
+        {
+            "name":"Login",
+            "url":"/login",
+            "description":"Login to your account"
+        },
+        {
+            "name":"Register",
+            "url":"/register",
+            "description":"Register a new account"
+        }
+    ]
     }
-  ]
-}
