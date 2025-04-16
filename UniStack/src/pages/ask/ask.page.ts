@@ -6,6 +6,11 @@ import { Router } from '@angular/router';
 import { QuestionService } from '../../app/services/question.service';
 import { Auth } from '@angular/fire/auth';
 
+/**
+ * AskPage Component
+ * 
+ * Provides an interface for users to submit new questions
+ */
 @Component({
   selector: 'app-ask',
   templateUrl: 'ask.page.html',
@@ -14,12 +19,22 @@ import { Auth } from '@angular/fire/auth';
   imports: [IonicModule, CommonModule, FormsModule]  
 })
 export class AskPage {
+  // Question object to store form input data
   question = {
     title: '',
     body: ''
   };
+  // Flag to track submission state and prevent multiple submissions
   isSubmitting = false;
 
+  /**
+   * Constructor injects required services
+   * @param questionService - Service for adding questions to the database
+   * @param toastController - Service for displaying toast notifications
+   * @param alertController - Service for displaying alert dialogs
+   * @param router - Service for navigation between pages
+   * @param auth - Firebase authentication service
+   */
   constructor(
     private questionService: QuestionService,
     private toastController: ToastController,
@@ -28,6 +43,10 @@ export class AskPage {
     private auth: Auth
   ) {}
 
+  /**
+   * Submits a new question to the platform
+   * Validates input, checks authentication, and interacts with the QuestionService
+   */
   async submitQuestion() {
     // Check if user is logged in
     if (!this.auth.currentUser) {
@@ -49,6 +68,7 @@ export class AskPage {
     this.isSubmitting = true;
     
     try {
+      // Add question to the database
       await this.questionService.addQuestion(
         this.question.title.trim(), 
         this.question.body.trim()
@@ -69,6 +89,11 @@ export class AskPage {
     }
   }
   
+  /**
+   * Displays a toast notification
+   * @param message - Message to display
+   * @param color - Color of the toast ('success' or 'danger')
+   */
   async presentToast(message: string, color: 'success' | 'danger') {
     const toast = await this.toastController.create({
       message: message,
@@ -79,6 +104,11 @@ export class AskPage {
     await toast.present();
   }
   
+  /**
+   * Displays an alert dialog
+   * @param header - Header text for the alert
+   * @param message - Message to display in the alert
+   */
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,
