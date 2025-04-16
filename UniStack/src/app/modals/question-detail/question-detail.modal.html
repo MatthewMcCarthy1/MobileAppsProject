@@ -1,7 +1,9 @@
+<!-- Header section with toolbar containing the title and close button -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Question Details</ion-title>
     <ion-buttons slot="end">
+      <!-- Close button to dismiss the modal -->
       <ion-button (click)="dismissModal()">
         <ion-icon name="close-outline"></ion-icon>
       </ion-button>
@@ -10,48 +12,63 @@
 </ion-header>
 
 <ion-content>
+  <!-- Main question container displaying the question's details -->
   <div class="question-container">
     <div class="question-header">
+      <!-- Question title displayed using interpolation -->
       <h1 class="question-title">{{ question.title }}</h1>
     </div>
     
     <div class="question-body">
+      <!-- Question body/content displayed using interpolation -->
       <p>{{ question.body }}</p>
     </div>
     
     <div class="question-footer">
+      <!-- User information section showing who posted the question -->
       <div class="user-info">
         <ion-icon name="person-circle-outline"></ion-icon>
+        <!-- Display email or 'Anonymous' if email is not available -->
         <span>{{ question.userEmail || 'Anonymous' }}</span>
       </div>
       
+      <!-- Timestamp section showing when the question was posted -->
       <div class="timestamp" *ngIf="formatDate(question.createdAt)">
         <ion-icon name="time-outline"></ion-icon>
+        <!-- Format the date using Angular's date pipe -->
         <span>{{ formatDate(question.createdAt) | date:'MMM d, y' }}</span>
       </div>
     </div>
   </div>
   
-  <!-- Answers Section -->
+  <!-- Answers Section - only displayed if there are answers available -->
   <div class="answers-section" *ngIf="question.answers && question.answers.length > 0">
+    <!-- Section title with answer count -->
     <h2 class="answers-title">Answers ({{ question.answers.length }})</h2>
     
+    <!-- Loop through each answer and display it -->
     <div class="answer-item" *ngFor="let answer of question.answers">
       <div class="answer-content">
+        <!-- Answer text displayed using interpolation -->
         <p>{{ answer.text }}</p>
       </div>
       
       <div class="answer-footer">
+        <!-- User information section showing who posted the answer -->
         <div class="user-info">
           <ion-icon name="person-circle-outline"></ion-icon>
+          <!-- Display email or 'Anonymous' if email is not available -->
           <span>{{ answer.userEmail || 'Anonymous' }}</span>
         </div>
         
+        <!-- Timestamp section showing when the answer was posted -->
         <div class="timestamp" *ngIf="formatDate(answer.createdAt)">
           <ion-icon name="time-outline"></ion-icon>
+          <!-- Format the date using Angular's date pipe -->
           <span>{{ formatDate(answer.createdAt) | date:'MMM d, y' }}</span>
         </div>
         
+        <!-- Delete button - only visible to the answer author -->
         <ion-button *ngIf="isCurrentUserAuthor(answer.userId)" 
                   fill="clear"
                   color="danger"
@@ -64,7 +81,7 @@
     </div>
   </div>
   
-  <!-- No Answers Message -->
+  <!-- No Answers Message - displayed when there are no answers -->
   <div class="answers-section no-answers" *ngIf="!question.answers || question.answers.length === 0">
     <h2 class="answers-title">Answers (0)</h2>
     <div class="no-answers-message">
@@ -72,12 +89,13 @@
     </div>
   </div>
   
-  <!-- Extra padding at the bottom to prevent content from being hidden behind the answer bar -->
+  <!-- Extra padding to prevent content from being hidden behind the sticky answer bar -->
   <div class="content-bottom-padding"></div>
 </ion-content>
 
-<!-- Sticky Answer Bar -->
+<!-- Sticky Answer Bar - stays at the bottom of the screen for user input -->
 <div class="sticky-answer-bar" [class.expanded]="isAnswerFormExpanded">
+  <!-- Collapsed state - shows only the button to add an answer -->
   <div class="collapsed-bar" *ngIf="!isAnswerFormExpanded">
     <button class="answer-button" (click)="toggleAnswerForm()">
       <ion-icon name="chatbox-outline"></ion-icon>
@@ -85,14 +103,17 @@
     </button>
   </div>
   
+  <!-- Expanded state - shows the answer form -->
   <div class="expanded-form" *ngIf="isAnswerFormExpanded">
     <div class="form-header">
       <h3>Your Answer</h3>
+      <!-- Button to collapse the form -->
       <button class="close-form-button" (click)="toggleAnswerForm()">
         <ion-icon name="chevron-down-outline"></ion-icon>
       </button>
     </div>
     
+    <!-- Textarea for answer input with two-way data binding using [(ngModel)] -->
     <ion-textarea 
       [(ngModel)]="answerText" 
       placeholder="Write your answer here..." 
@@ -102,18 +123,22 @@
       [disabled]="isSubmitting">
     </ion-textarea>
     
+    <!-- Form action buttons -->
     <div class="form-actions">
+      <!-- Cancel button - collapses the form -->
       <button 
         class="cancel-button" 
         (click)="toggleAnswerForm()"
         [disabled]="isSubmitting">
         Cancel
       </button>
+      <!-- Submit button - sends the answer to the server -->
       <button 
         class="submit-button" 
         (click)="submitAnswer()" 
         [disabled]="isSubmitting || !answerText.trim()">
         <ion-icon name="send-outline"></ion-icon>
+        <!-- Dynamic text based on submission state -->
         {{ isSubmitting ? 'Posting...' : 'Post Answer' }}
       </button>
     </div>

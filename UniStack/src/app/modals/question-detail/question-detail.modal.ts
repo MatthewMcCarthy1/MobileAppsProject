@@ -114,10 +114,21 @@ export class QuestionDetailModal implements OnInit {
     }
   }
 
+  /**
+   * Checks if the current authenticated user is the author of the content
+   * Used to control visibility of delete buttons for answers
+   * @param userId - The user ID to compare with the current authenticated user
+   * @returns boolean - True if the current user is the author, false otherwise
+   */
   isCurrentUserAuthor(userId: string): boolean {
     return !!this.auth.currentUser && this.auth.currentUser.uid === userId;
   }
 
+  /**
+   * Displays a confirmation dialog before deleting an answer
+   * Prevents accidental deletions by requiring explicit confirmation
+   * @param answer - The answer object to be deleted if confirmed
+   */
   async confirmDeleteAnswer(answer: any) {
     const alert = await this.alertController.create({
       header: 'Delete Answer',
@@ -138,32 +149,53 @@ export class QuestionDetailModal implements OnInit {
     await alert.present();
   }
 
+  /**
+   * Deletes an answer after confirmation
+   * @param answer - The answer object to be deleted
+   */
   async deleteAnswer(answer: any) {
     try {
+      // Call the service to delete the answer from the database
       await this.questionService.deleteAnswer(this.question.id, answer.id);
+      
       // Update the local array to reflect the deletion immediately
+      // This is simpler than reloading all answers from the database
       this.question.answers = this.question.answers.filter((a: any) => a.id !== answer.id);
+      
+      // Notify the user of success
       this.presentToast('Answer deleted successfully', 'success');
     } catch (error: any) {
-      this.presentAlert('Error', error.message || 'Failed to delete answer');
+      // Show error message if deletion fails
+      this.presentAlert('Error', 'Failed to delete answer');
     }
   }
   
+  /**
+   * Displays a toast notification to the user
+   * @param message - Text message to display in the toast
+   * @param color - Color of the toast (success = green, danger = red)
+   */
   async presentToast(message: string, color: 'success' | 'danger') {
     const toast = await this.toastController.create({
       message: message,
-      duration: 2000,
+      duration: 1000, // Toast will automatically disappear after 1 second
       color: color,
-      position: 'bottom'
+      position: 'bottom' // Toast appears at the bottom of the screen
     });
     await toast.present();
   }
   
+  /**
+   * Displays an alert dialog with a message and OK button
+   * Used for important notifications that require user acknowledgment
+   * @param header - Title text for the alert dialog
+   * @param message - Descriptive message to show in the alert body
+   */
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header: header,
       message: message,
-      buttons: ['OK']
+      buttons: ['OK'] // Single button to dismiss the alert
     });
     await alert.present();
   }
