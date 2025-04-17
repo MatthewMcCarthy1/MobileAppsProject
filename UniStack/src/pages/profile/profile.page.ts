@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Auth, signOut } from '@angular/fire/auth';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { addIcons } from 'ionicons';
-import { personCircleOutline, camera, images, closeCircle } from 'ionicons/icons';
+import { personCircleOutline, camera, images, closeCircle, trash } from 'ionicons/icons';
 
 /**
  * ProfilePage Component
@@ -27,7 +27,7 @@ export class ProfilePage {
   profileImage: string | null = null;
 
   constructor() {
-    addIcons({ personCircleOutline, camera, images, closeCircle });
+    addIcons({ personCircleOutline, camera, images, closeCircle, trash });
   }
   
   /**
@@ -51,29 +51,42 @@ export class ProfilePage {
    * Shows options to take a new photo or select from gallery
    */
   async changeProfilePicture() {
+    let buttons: any[] = [
+      {
+        text: 'Take Photo',
+        icon: 'camera',
+        handler: () => {
+          this.getPicture(CameraSource.Camera);
+        }
+      },
+      {
+        text: 'Choose from Gallery',
+        icon: 'images',
+        handler: () => {
+          this.getPicture(CameraSource.Photos);
+        }
+      }
+    ];
+    
+    // Add remove photo option if a profile image exists
+    if (this.profileImage) {
+      buttons.push({
+        text: 'Remove Photo',
+        icon: 'trash',
+        handler: () => {
+          this.removeProfilePicture();
+        }
+      });
+    }
+    
+    buttons.push({
+      text: 'Cancel',
+      icon: 'close-circle'
+    });
+
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Change Profile Picture',
-      buttons: [
-        {
-          text: 'Take Photo',
-          icon: 'camera',
-          handler: () => {
-            this.getPicture(CameraSource.Camera);
-          }
-        },
-        {
-          text: 'Choose from Gallery',
-          icon: 'images',
-          handler: () => {
-            this.getPicture(CameraSource.Photos);
-          }
-        },
-        {
-          text: 'Cancel',
-          icon: 'close-circle',
-          role: 'cancel'
-        }
-      ]
+      buttons: buttons
     });
 
     await actionSheet.present();
@@ -96,5 +109,12 @@ export class ProfilePage {
     } catch (error) {
       console.error('Camera error:', error);
     }
+  }
+
+  /**
+   * Removes the current profile picture
+   */
+  private removeProfilePicture() {
+    this.profileImage = null;
   }
 }
