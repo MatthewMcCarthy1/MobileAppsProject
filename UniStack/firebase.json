@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/UniStack",
+    "public": "www",
     "ignore": [
       "firebase.json",
       "**/.*",

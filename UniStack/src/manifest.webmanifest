@@ -1,0 +1,57 @@
+{
+"name": "UniStack",
+"short_name": "UniStack",
+"start_url": "/",
+"display": "standalone",
+"description": "A forum and community platform for students and educators.",
+"lang": "en",
+"dir": "auto",
+"theme_color": "#4285F4",
+"background_color": "#4285F4",
+"orientation": "any",
+"icons": [
+    {
+        "src": "/icons/icon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/icons/icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+    }
+],
+"screenshots": [
+    {
+        "src": "/screenshots/home-screen.png",
+        "sizes": "2880x1800",
+        "type": "image/png",
+        "description": "UniStack home dashboard"
+    }
+],
+"related_applications": [
+    {
+        "platform": "windows",
+        "url": "https://apps.microsoft.com/detail/unistack"
+    },
+    {
+        "platform": "play",
+        "url": "https://play.google.com/store/apps/details?id=com.unistack.app"
+    }
+],
+"prefer_related_applications": false,
+"shortcuts": [
+    {
+        "name": "Login",
+        "url": "/Login",
+        "description": "Login to your account"
+    },
+    {
+        "name": "Register",
+        "url": "/Register",
+        "description": "Create a new account"
+    }
+]
+}
