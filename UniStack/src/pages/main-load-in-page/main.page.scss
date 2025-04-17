@@ -3,7 +3,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh; 
+  padding: 20px 15px; 
+  box-sizing: border-box; 
   background: linear-gradient(to bottom, #E6F3FF, #F0E6FF);
   text-align: center;
 }
@@ -13,7 +15,6 @@ h1 {
   color: #333;
   margin-bottom: 1rem;
 }
-
 .app-logo {
   width: 220px;
   height: 220px;
@@ -24,6 +25,7 @@ h1 {
 .button-container {
   display: flex;
   gap: 1rem;
+  justify-content: center; 
 }
 
 .action-button {
@@ -76,23 +78,50 @@ h1 {
 @media (max-width: 480px) {
   h1 {
     font-size: 2.5rem; 
+    margin-bottom: 0.75rem;
   }
 
   .app-logo {
     width: 120px; 
     height: 120px;
+    margin-bottom: 1.5rem;
   }
 
   .action-button {
     padding: 0.5rem 1.5rem; 
-    font-size: 1.2rem; 
+    font-size: 1.4rem; 
+    max-width: 200px;
+    margin-bottom: 0.8rem; 
+    border-radius: 30px; 
   }
 
   .spaced-row {
-    margin-bottom: 30px; 
+    margin-bottom: 20px; 
   }
 
   .spaced-buttons {
-    gap: 2rem; 
+    gap: 1rem; 
+    
+  }
+}
+
+@media (max-width: 360px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .app-logo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .spaced-row {
+    margin-bottom: 15px;
+  }
+
+  .action-button {
+    padding: 0.7rem 1.8rem;
+    font-size: 1.3rem; 
+    max-width: 220px; 
   }
 }
