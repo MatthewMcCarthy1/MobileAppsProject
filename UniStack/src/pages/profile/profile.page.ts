@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { IonContent, IonIcon, IonHeader, IonToolbar, IonTitle } from '@ionic/angular/standalone';
+import { IonContent, IonIcon, IonHeader, IonToolbar, IonTitle, ActionSheetController } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Auth, signOut } from '@angular/fire/auth';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { addIcons } from 'ionicons';
-import { personCircleOutline, camera } from 'ionicons/icons';
+import { personCircleOutline, camera, images, closeCircle } from 'ionicons/icons';
 
 /**
  * ProfilePage Component
@@ -22,11 +22,12 @@ import { personCircleOutline, camera } from 'ionicons/icons';
 export class ProfilePage {
   private auth: Auth = inject(Auth);
   private router: Router = inject(Router);
+  private actionSheetCtrl: ActionSheetController = inject(ActionSheetController);
   isLoading: boolean = false;
   profileImage: string | null = null;
 
   constructor() {
-    addIcons({ personCircleOutline, camera });
+    addIcons({ personCircleOutline, camera, images, closeCircle });
   }
   
   /**
@@ -47,20 +48,50 @@ export class ProfilePage {
 
   /**
    * Changes the user's profile picture
-   * Opens the device camera or photo gallery to select an image
+   * Shows options to take a new photo or select from gallery
    */
   async changeProfilePicture() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Change Profile Picture',
+      buttons: [
+        {
+          text: 'Take Photo',
+          icon: 'camera',
+          handler: () => {
+            this.getPicture(CameraSource.Camera);
+          }
+        },
+        {
+          text: 'Choose from Gallery',
+          icon: 'images',
+          handler: () => {
+            this.getPicture(CameraSource.Photos);
+          }
+        },
+        {
+          text: 'Cancel',
+          icon: 'close-circle',
+          role: 'cancel'
+        }
+      ]
+    });
+
+    await actionSheet.present();
+  }
+
+  /**
+   * Gets a picture from the specified source
+   * @param source Camera source (Camera or Photos)
+   */
+  private async getPicture(source: CameraSource) {
     try {
-      // Open the device camera or photo gallery to select an image
       const image = await Camera.getPhoto({
-        quality: 90,          // Set the image quality to 90%
-        allowEditing: true,   // Allow the user to crop/edit the image
-        resultType: CameraResultType.DataUrl, // Get image as base64 data URL
-        source: CameraSource.Prompt  // Let the user choose camera or gallery
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.DataUrl,
+        source: source
       });
       
-      // Store the captured image data URL as profile picture
-      // (??) ensures we set null if dataUrl is undefined
       this.profileImage = image.dataUrl ?? null;
     } catch (error) {
       console.error('Camera error:', error);
