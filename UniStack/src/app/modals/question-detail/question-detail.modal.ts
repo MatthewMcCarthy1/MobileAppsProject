@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, IonicModule, ToastController, AlertController } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonButtons, IonIcon, IonTextarea, ModalController, NavParams, ToastController, AlertController } from '@ionic/angular/standalone';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { QuestionService } from '../../services/question.service';
 import { Auth } from '@angular/fire/auth';
@@ -12,7 +12,20 @@ import { personCircleOutline, timeOutline, closeOutline, chatboxOutline, chevron
   templateUrl: './question-detail.modal.html',
   styleUrls: ['./question-detail.modal.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [
+    IonHeader, 
+    IonToolbar, 
+    IonTitle, 
+    IonContent, 
+    IonButton, 
+    IonButtons,
+    IonIcon, 
+    IonTextarea, 
+    CommonModule, 
+    FormsModule,
+    NgIf,
+    NgFor
+  ]
 })
 export class QuestionDetailModal implements OnInit {
   question: any;

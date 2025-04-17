@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicModule, ToastController, AlertController } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonContent, IonTextarea, IonInput, ToastController, AlertController } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { Auth } from '@angular/fire/auth';
   templateUrl: 'ask.page.html',
   styleUrls: ['ask.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]  
+  imports: [IonHeader, IonToolbar, IonTitle, IonList, IonItem, IonContent, IonTextarea, IonInput, CommonModule, FormsModule]  
 })
 export class AskPage {
   // Question object to store form input data

@@ -5,7 +5,7 @@ import { addIcons } from 'ionicons';
 import { happyOutline, eyeOutline, eyeOffOutline } from 'ionicons/icons';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 /**
  * LoginPage Component
@@ -17,7 +17,7 @@ import { NgIf } from '@angular/common';
   templateUrl: 'login.page.html',
   styleUrls: ['login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonIcon, FormsModule, NgIf],
+  imports: [IonContent, IonIcon, FormsModule, NgIf, CommonModule],
 })
 export class LoginPage {
   private auth: Auth = inject(Auth); // This provides Firebase Auth services

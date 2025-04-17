@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonIcon, IonHeader, IonToolbar, IonTitle } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Auth, signOut } from '@angular/fire/auth';
@@ -17,7 +17,7 @@ import { personCircleOutline, camera } from 'ionicons/icons';
   templateUrl: 'profile.page.html',
   styleUrls: ['profile.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule] 
+  imports: [IonContent, IonIcon, IonHeader, IonToolbar, IonTitle, CommonModule] 
 })
 export class ProfilePage {
   private auth: Auth = inject(Auth);

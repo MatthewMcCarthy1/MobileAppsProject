@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, ModalController, AlertController, ToastController } from '@ionic/angular';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonSearchbar, IonSpinner, IonButton, IonIcon, ModalController, AlertController, ToastController } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { QuestionService } from '../../app/services/question.service';
 import { Question } from '../../app/models/question.model';
 import { DatePipe } from '@angular/common';
@@ -21,7 +21,22 @@ import { Auth } from '@angular/fire/auth';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule, CommonModule, DatePipe, RouterLink]
+  imports: [
+    IonHeader, 
+    IonToolbar, 
+    IonTitle, 
+    IonContent, 
+    IonSearchbar, 
+    IonSpinner, 
+    IonButton, 
+    IonIcon, 
+    FormsModule, 
+    CommonModule, 
+    DatePipe, 
+    RouterLink,
+    NgIf,
+    NgFor
+  ]
 })
 export class HomePage implements OnInit {
   // Text entered in the search field

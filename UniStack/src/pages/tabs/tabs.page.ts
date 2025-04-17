@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { home, addCircleOutline, personCircleOutline } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonicModule, RouterModule]
+  imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, RouterModule]
 })
 export class TabsPage {
   constructor() {

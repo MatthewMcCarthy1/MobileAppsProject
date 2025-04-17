@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { eyeOutline, eyeOffOutline, happyOutline } from 'ionicons/icons';
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { NgIf } from '@angular/common';
 
 /**
  * RegisterPage Component
@@ -17,7 +18,7 @@ import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
   templateUrl: 'register.page.html',
   styleUrls: ['register.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonContent, IonIcon]
+  imports: [CommonModule, FormsModule, IonContent, IonIcon, NgIf]
 })
 export class RegisterPage {
   // Inject Firebase Authentication service
