@@ -11,13 +11,13 @@
 "orientation": "any",
 "icons": [
     {
-        "src": "assets/appimages/figmapic.png",
+        "src": "assets/AppImages/windows11/Square44x44Logo.scale-400.png",
         "sizes": "512x512",
         "type": "image/png",
-        "purpose": "any maskable"
+        "purpose": "maskable"
     },
     {
-        "src": "assets/appimages/figmapic.png",
+        "src": "assets/AppImages/windows11/Square44x44Logo.scale-400.png",
         "sizes": "192x192",
         "type": "image/png",
         "purpose": "any"
@@ -25,7 +25,7 @@
 ],
 "screenshots": [
     {
-        "src": "/screenshots/home-screen.png",
+        "src": "assets/appimages/figmapic.png",
         "sizes": "2880x1800",
         "type": "image/png",
         "description": "UniStack home dashboard"
