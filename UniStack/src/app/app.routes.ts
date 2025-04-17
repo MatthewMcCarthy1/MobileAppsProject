@@ -42,18 +42,8 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'home',
-    redirectTo: 'tabs/home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'ask',
-    redirectTo: 'tabs/ask',
-    pathMatch: 'full'
-  },
-  {
-    path: 'profile',
-    redirectTo: 'tabs/profile',
+    path: '**',
+    redirectTo: 'main',
     pathMatch: 'full'
   }
 ];
