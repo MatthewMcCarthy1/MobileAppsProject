@@ -13,6 +13,10 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('../pages/register/register.page').then((m) => m.RegisterPage),
   },
+  { 
+    path: 'verification-sent', 
+    loadComponent: () => import('../pages/register/verification-sent.page').then(m => m.VerificationSentPage) 
+  },
   {
     path: 'tabs',
     loadComponent: () => import('../pages/tabs/tabs.page').then((m) => m.TabsPage),

@@ -5,8 +5,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { eyeOutline, eyeOffOutline, happyOutline } from 'ionicons/icons';
-import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, sendEmailVerification } from '@angular/fire/auth';
 import { NgIf } from '@angular/common';
+
 
 /**
  * RegisterPage Component
@@ -70,8 +71,15 @@ export class RegisterPage {
         this.email,
         this.password
       );
-      console.log('Registered user:', userCredential.user);
-      this.router.navigate(['/tabs/home']);  
+
+      // Send email verification
+      await sendEmailVerification(userCredential.user);
+
+      // Inform user about verification email
+    this.router.navigate(['/verification-sent'], { 
+      queryParams: { email: this.email } 
+    });
+
     } catch (error: any) {
       switch (error.code) {
         case 'auth/email-already-in-use':
@@ -85,7 +93,6 @@ export class RegisterPage {
           break;
         default:
           this.errorMessage = 'Failed to register. Please try again';
-          console.error('Registration error:', error);
       }
     } finally {
       this.isLoading = false;

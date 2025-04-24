@@ -3,7 +3,7 @@ import { IonContent, IonIcon } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { happyOutline, eyeOutline, eyeOffOutline } from 'ionicons/icons';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, signInWithEmailAndPassword, sendEmailVerification } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 
@@ -67,7 +67,15 @@ export class LoginPage {
         this.email,
         this.password
       );
-      console.log('Logged in user:', userCredential.user);
+
+      // Check if email is verified
+    if (!userCredential.user.emailVerified) {
+      this.errorMessage = 'Please verify your email before logging in';
+      // Optionally resend verification email
+      await sendEmailVerification(userCredential.user);
+      return;
+    }
+
       // Navigate to the home page upon successful login
       this.router.navigate(['/tabs/home']); 
     } catch (error: any) {
